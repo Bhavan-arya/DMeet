@@ -1,6 +1,5 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+<img width="1919" height="864" alt="image" src="https://github.com/user-attachments/assets/d0397aa3-ab93-4faa-8e9f-229f83255f1a" />
+
 
 # Dmeet - Video Call Meeting App
 
@@ -137,6 +136,7 @@ Dmeet uses WebRTC for peer-to-peer video connections:
 - Opera
 
 **Note**: WebRTC requires HTTPS in production. Vercel automatically provides this!
+![WhatsApp Image 2025-11-13 at 12 49 22_1f65bef4](https://github.com/user-attachments/assets/ff39cf04-77e0-4b4b-8633-10a519f2b61f)
 
 ## Troubleshooting
 
@@ -152,6 +152,40 @@ Dmeet uses WebRTC for peer-to-peer video connections:
 - Check browser permissions for camera/microphone
 - Try using Chrome/Edge for best compatibility
 
+### Note this whoever reading this
+
+- Quick path (easiest)
+- Sign up for Twilio or Xirsys.
+- Grab the TURN credentials (URL, username, credential).
+- Replace the block in constants.ts:
+```bash
+export const PEER_CONNECTION_CONFIG: RTCConfiguration = {
+  iceServers: [
+    { urls: 'stun:global.stun.example.com:3478' },
+    {
+      urls: [
+        'turn:global.turn.example.com:3478?transport=udp',
+        'turn:global.turn.example.com:3478?transport=tcp'
+      ],
+      username: 'YOUR_USERNAME',
+      credential: 'YOUR_PASSWORD'
+    }
+  ],
+  iceCandidatePoolSize: 10,
+};
+```
+- Rebuild/deploy and test again.
+- Self-host Coturn (if you prefer)
+- Spin up a small VM (e.g., AWS Lightsail, $5/mo).
+- Install coturn, configure it with your domain, create a shared secret or static credentials.
+- Expose ports 3478 (UDP/TCP) and 5349 (TLS) in your firewall.
+- Plug those TURN URLs into constants.ts.
+- Other things to double-check
+- Both browsers must be on HTTPS (Vercel provides this).
+- Confirm camera/mic permissions granted.
+- Watch the browser console for warnings (iceConnectionState, peerConnectionState).
+- Test with one device on Wi‑Fi and another on mobile hotspot to confirm TURN works.
+- Once you swap in a stable TURN service, calls should connect within ~5–10 seconds even across different networks. Let me know which route you prefer and I can walk you through the exact steps.
 ## License
 
 MIT
