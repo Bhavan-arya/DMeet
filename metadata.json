@@ -1,0 +1,8 @@
+{
+  "name": "Dmeet",
+  "description": "A sleek, high-quality video calling application for users to share and watch media together. Built with WebRTC for a smooth, low-latency experience.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
