@@ -189,7 +189,3 @@ export const PEER_CONNECTION_CONFIG: RTCConfiguration = {
 ## License
 
 MIT
-
----
-
-**Ready to deploy?** Follow the Vercel deployment steps above and start using Dmeet! 🚀
